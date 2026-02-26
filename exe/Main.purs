@@ -18,14 +18,17 @@ import Effect.Aff (launchAff_)
 import Effect.Exception (throw)
 import Scaffold as Scaffold
 
+foreign import blockfrostApiKey :: String
+
 main :: Effect Unit
-main = launchAff_ $ Contract.Monad.runContract contractParams Scaffold.contract
+main = launchAff_ $ do
+  Contract.Monad.runContract contractParams Scaffold.contract
 
 contractParams :: Contract.Config.ContractParams
 contractParams =
   Contract.Config.mainnetConfig
     { backendParams = Contract.Config.mkBlockfrostBackendParams
-        { blockfrostApiKey: Just "mainnetrxcvV9fb3sjWclSpUy7aMxz4ZNtOIeGa"
+        { blockfrostApiKey: Just blockfrostApiKey
         , blockfrostConfig: Contract.Config.blockfrostPublicMainnetServerConfig
         , confirmTxDelay: Nothing
         }

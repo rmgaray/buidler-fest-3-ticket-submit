@@ -41,12 +41,11 @@ delete-bundle-entrypoint:
 	@rm -f ./dist/entrypoint.js
 
 esbuild-bundle: build create-bundle-entrypoint
-	BROWSER_RUNTIME=${browser-runtime} node esbuild/bundle.js ./dist/entrypoint.js dist/index.js
+	BLOCKFROST_API_KEY="${BLOCKFROST_API_KEY}" BROWSER_RUNTIME=${browser-runtime} node esbuild/bundle.js ./dist/entrypoint.js dist/index.js
 	@make delete-bundle-entrypoint
 
 esbuild-serve: build create-bundle-entrypoint create-html-entrypoint
-
-	BROWSER_RUNTIME=1 node esbuild/serve.js ./dist/entrypoint.js dist/index.js dist/ ${serve-port}
+	BLOCKFROST_API_KEY="${BLOCKFROST_API_KEY}" BROWSER_RUNTIME=1 node esbuild/serve.js ./dist/entrypoint.js dist/index.js dist/ ${serve-port}
 
 webpack-bundle: build create-bundle-entrypoint
 	BROWSER_RUNTIME=${browser-runtime} webpack --mode=production \

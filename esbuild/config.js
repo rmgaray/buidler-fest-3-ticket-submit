@@ -7,6 +7,9 @@ export const buildOptions = ({ entryPoint, outfile }) => {
   const config = {
     entryPoints: [entryPoint],
     outfile: outfile,
+    define: {
+      "globalThis.BLOCKFROST_API_KEY": JSON.stringify(process.env.BLOCKFROST_API_KEY || ""),
+    },
     plugins: [
       wasmLoader({
         mode: "deferred",
