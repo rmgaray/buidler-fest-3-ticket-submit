@@ -33,7 +33,7 @@ contractParams =
         , confirmTxDelay: Nothing
         }
     , walletSpec =
-        Just $ Contract.Config.ConnectToGenericCip30 "DevWallet" { cip95: false }
+        Just $ Contract.Config.ConnectToGenericCip30 "eternl" { cip95: false }
     , customLogger = Just browserFormatter
     }
 
